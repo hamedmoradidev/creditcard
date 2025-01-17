@@ -9,6 +9,21 @@
             font-family: myYekan;
             src: url(yekan/yekan/Yekan.woff2);
         }
+        @keyframes anime {
+            10%
+            {transform:perspective(800px) rotateZ(-30deg);
+            scale: 1.1;
+            }
+            11%,50%
+            {transform:perspective(800px) rotateZ(-30deg) rotateY(180deg);
+            scale: 1.1;
+            }
+            51%,90%
+            {transform:perspective(800px) rotateZ(-30deg) rotateY(360deg);
+            scale: 1.1;
+            }
+
+        }
         *{
             box-sizing: border-box;
             margin: 0;
@@ -17,6 +32,14 @@
         }
         .rotate{
             transform:perspective(800px) rotateY(180deg);
+        }
+        .anime{
+            animation-name: anime;
+            animation-duration: 5s;
+            animation-play-state:running;
+            animation-iteration-count: infinite;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
         }
         body{
             height: 100vh;
@@ -31,15 +54,77 @@
                 justify-content:space-around;
                 align-items: center;
                 background-color: #edf4fc;
+                position: relative;
+                #color{
+                   height: 150px;
+                   display: flex;
+                   justify-content:space-evenly;
+                   align-content: space-around;
+                   flex-wrap: wrap;
+                   width: 40px;
+                    >div{
+                        position: relative;
+                        width: 25px;
+                        height: 25px;
+                        cursor: pointer;
+                        >input{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            opacity:100%;
+                            border-radius: 50%;
+                            cursor: pointer;
+                        }
+                        >span{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            outline-offset: 2px;
+                            pointer-events: none;
+                        }
+                        &:nth-of-type(1){
+                            >span{
+                                background-color: #4f91e7;
+                            }
+                            input:checked ~ span{
+                               outline: 2px solid #4f91e7;
+                            }
+                        }
+                        &:nth-of-type(2){
+                            >span{
+                                background-color: #ff0e3b;
+                            }
+                            input:checked ~ span{
+                               outline: 2px solid #ff0e3b;
+                            }
+                        }
+                        &:nth-of-type(3){
+                            >span{
+                                background-color: #00aa83;
+                            }
+                            input:checked ~ span{
+                               outline: 2px solid #00aa83;
+                            }
+                        }
+
+                    }
+                }
                 #card{
                     height: 80%;
-                    width: 600px;
+                    margin-left: 100px;
+                    margin-right: 100px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     transform-origin: center;
                     transform-style: preserve-3d;
                     transition: 1s;
+                    cursor: pointer;
                     >div{
                         margin: 10px;
                         height: 400px;
@@ -53,7 +138,7 @@
                             align-items: center;
                             align-content:flex-start;
                             flex-wrap: wrap;
-                            background-color: brown;
+                            background-color: #4f91e7;
                             color: white;
                             backface-visibility: hidden;
                             >h1{
@@ -72,7 +157,7 @@
                         }
                         &:nth-of-type(1){
                                 position: relative;
-                                background-color: brown;
+                                background-color: #4f91e7;
                                 position: relative;
                                 color: white;
                                 display: flex;
@@ -96,7 +181,8 @@
                                                 text-align: left;
                                                 font-size: 18px;
                                                 font-weight: 100;
-                                                height: 15px;
+                                                height: 40px;
+                                                overflow: hidden;
                                                 }
                                             >div{
                                                 width: 100%;
@@ -163,60 +249,85 @@
                 }
                 #input{
                     height: 80%;
-                    width: 400px;
+                    width: 600px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    align-content: center;
                     >div{
+                        height: 100%;
                         width: 300px;
-                        height: 400px;
                         display: flex;
-                        justify-content: center;
-                        align-items: center;
+                   
                         flex-wrap: wrap;
                         color: #5e5e5e;
                         *{
                             width: 100%;
                         }
                         >input{
-                            border: 1px solid #4e91e6;
+                            border: 2px solid transparent;
                             border-radius: 5px;
                             color: #718e9c;
                             height: 30px;
                             text-align: left;
+                            outline: none;
+                            font-size: 17px;
+                            height: 40px;
                             &:nth-of-type(4){
                                 text-align: right;
                             }
-                           
+                            &:focus{
+                                border: 2px solid #4e91e6;
+                            }
                             padding-left: 10px;
                             padding-right: 10px;
                         }
                         >h4{
                             text-align: right;
+                            direction: rtl;
+                        }
+                        >label{
+                            text-align: right;
+                            height: 10px;
                         }
                     }
+                }
+                >svg{
+                    position: absolute;
+                    left: 20px;
+                    bottom: 20px;
+                    width: 50px;
+                    height: 50px;
+                    color: #5e5e5e;
+                    cursor: pointer;
                 }
             }
         }
     </style>
 </head>
-<body dir="rtl">
+<body>
     <main>
-        <div id="input">
+        <div id="color">
+
             <div>
-                <label for="">شماره کارت</label>
-                <input type="text" maxlength="16">
-                <label for="">cvv2</label>
-                <input type="text" maxlength="4">
-                <label for="">تاریخ</label>
-                <input type="text" maxlength="4" placeholder="04/12">    
-                <label for="">نام و نام خانوادگی</label>
-                <input type="text" maxlength="20">
-                <label for="">مبلغ</label>
-                <input type="text" maxlength="20" placeholder="ریال">
-                <h4 id="amount">تومان</h4>
+                <input data-c="#4f91e7" class="radio" type="radio" name="rdo" checked>
+                <span  id="blue"></span>
+
+            </div>
+            <div>
+                <input data-c="#ff0e3b" class="radio" type="radio" name="rdo">
+                <span id="green"></span>
+
+            </div>
+            <div>
+                <input data-c="#00aa83" class="radio" type="radio" name="rdo">
+                <span id="red"></span>
+
             </div>
         </div>
+        <svg onclick="animation()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+        </svg>          
         <div id="card">
             <div id="back">
                 <div>
@@ -252,9 +363,24 @@
             </div>
 
         </div>
+        <div id="input">
+            <div>
+                <label for="number">شماره کارت</label>
+                <input name="number" type="text" maxlength="16">
+                <label for="cvv2">cvv2</label>
+                <input name="cvv2" type="text" maxlength="3">
+                <label for="date">تاریخ</label>
+                <input name="date" type="text" maxlength="4" placeholder="04/12">    
+                <label for="name">نام و نام خانوادگی</label>
+                <input name="name" type="text" maxlength="20">
+                <label for="amount">مبلغ</label>
+                <input name="amount" type="text" maxlength="20" placeholder="ریال">
+                <h4 id="amount">تومان</h4>
+            </div>
+        </div>
     </main>
     <script>
-        const inp=document.querySelectorAll("input")
+        const inp=document.querySelectorAll("input[type='text']")
         const amount=document.getElementById("amount")
         const cvv=document.getElementById("cvv")
         const cardP1=document.getElementById("cardShow")
@@ -263,21 +389,54 @@
         const front=document.getElementById("front")
         const back=document.getElementById("back")
         const card=document.getElementById("card")
+        const radio=document.querySelectorAll("input[type='radio']")
+        const anime=document.querySelector(".anime")
+        console.log(radio)
         let flag=true
-        inp[0].addEventListener("input",()=>{
+        inp[0].addEventListener("keypress",(e)=>{
+            if(!(e.key>=0 && e.key<=9)){
+                e.preventDefault()
+            }
             cardP1.textContent=inp[0].value
+            if((inp[0].value.length)>=16){
+                console.log("ok")
+                inp[1].focus()
+            }
         })
-        inp[1].addEventListener("input",()=>{
+        inp[1].addEventListener("keypress",(e)=>{
             cvv.textContent=inp[1].value
+            if(!(e.key>=0 && e.key<=9)){
+                e.preventDefault()
+            }
+            if(inp[1].value.length==3){
+                inp[2].focus()
+            }
+        })
+        inp[2].addEventListener("keypress",(e)=>{
+            if(!(e.key>=0 && e.key<=9)){
+                e.preventDefault()
+            }
+            if(inp[2].value.length>=4){
+                inp[3].focus()
+            }
+
         })
         inp[2].addEventListener("input",()=>{
             date.textContent=inp[2].value.slice(0,2) +"/"+ inp[2].value.slice(2,4)
         })
-        inp[3].addEventListener("input",()=>{
+        inp[3].addEventListener("keypress",(e)=>{
+            if((e.key>=0 && e.key<=9)){
+                e.preventDefault()
+            }
             name.textContent=inp[3].value
         })
+        inp[4].addEventListener("keypress",(e)=>{
+            if(!(e.key>=0 && e.key<=9)){
+                e.preventDefault()
+            }            
+        })
         inp[4].addEventListener("input",()=>{
-            amount.textContent=inp[4].value.slice(0,(inp[4].value.length-1)) +" تومان"
+            amount.textContent=inp[4].value.slice(0,(inp[4].value.length-1)) + " تومان"
         })
         card.addEventListener("click",()=>{
             card.classList.toggle("rotate")
@@ -287,15 +446,41 @@
             val.addEventListener("focus",()=>{
                 if(flag!==false){
                     card.classList.toggle("rotate")
+                    flag=false
                 }
             })
             val.addEventListener("blur",()=>{
                 if(flag!==true){
                     card.classList.toggle("rotate")
+                    flag=true
                 }
-                card.classList.toggle("rotate")
             })
         })
+        radio.forEach((val)=>{
+            val.addEventListener("click",()=>{
+                console.log("click")
+                radio.forEach((valu)=>{
+                    valu.removeAttribute("checked")
+                })
+                val.setAttribute("checked","checked")
+                front.style.backgroundColor=val.getAttribute("data-c")
+                back.style.backgroundColor=val.getAttribute("data-c")
+                if(flag!==true){
+                    card.classList.toggle("rotate")
+                    flag=true
+                }
+            })
+        })
+        function animation(){
+            if(flag!==true){
+                    card.classList.toggle("rotate")
+                    flag=true
+            }
+            card.classList.add("anime")
+            setTimeout(() => {
+                card.classList.remove("anime")
+            }, 5000);
+        }
     </script>
 </body>
 </html>
