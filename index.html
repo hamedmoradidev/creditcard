@@ -425,8 +425,11 @@
             date.textContent=inp[2].value.slice(0,2) +"/"+ inp[2].value.slice(2,4)
         })
         inp[3].addEventListener("keypress",(e)=>{
-            if((e.key>=0 && e.key<=9)){
+            if(e.key>=0 && e.key<=9 && e.key!=" "){
                 e.preventDefault()
+                console.log("space")
+                console.log(e.key)
+
             }
             name.textContent=inp[3].value
         })
