@@ -397,6 +397,8 @@
             if(!(e.key>=0 && e.key<=9)){
                 e.preventDefault()
             }
+        })
+        inp[0].addEventListener("input",e =>{
             cardP1.textContent=inp[0].value
             if((inp[0].value.length)>=16){
                 console.log("ok")
@@ -404,35 +406,43 @@
             }
         })
         inp[1].addEventListener("keypress",(e)=>{
-            cvv.textContent=inp[1].value
             if(!(e.key>=0 && e.key<=9)){
                 e.preventDefault()
             }
+        })
+        inp[1].addEventListener("input",e =>{
+            cvv.textContent=inp[1].value
             if(inp[1].value.length==3){
                 inp[2].focus()
             }
         })
+
+
         inp[2].addEventListener("keypress",(e)=>{
             if(!(e.key>=0 && e.key<=9)){
                 e.preventDefault()
             }
+        })
+        inp[2].addEventListener("input",e =>{
             if(inp[2].value.length>=4){
                 inp[3].focus()
             }
-
-        })
-        inp[2].addEventListener("input",()=>{
             date.textContent=inp[2].value.slice(0,2) +"/"+ inp[2].value.slice(2,4)
         })
+
         inp[3].addEventListener("keypress",(e)=>{
             if(e.key>=0 && e.key<=9 && e.key!=" "){
                 e.preventDefault()
-                console.log("space")
-                console.log(e.key)
-
             }
             name.textContent=inp[3].value
         })
+        inp[3].addEventListener("input",e =>{
+            if(inp[3].value.length>=15){
+                inp[4].focus()
+            }
+            name.textContent=inp[3].value
+        })
+
         inp[4].addEventListener("keypress",(e)=>{
             if(!(e.key>=0 && e.key<=9)){
                 e.preventDefault()
